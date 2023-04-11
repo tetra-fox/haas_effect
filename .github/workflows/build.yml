@@ -20,7 +20,7 @@ jobs:
       matrix:
         include:
           - os: macos-latest
-            targets: ["x86_64-apple-darwin", " aarch64-apple-darwin"]
+            targets: ["x86_64-apple-darwin", "aarch64-apple-darwin"]
           - os: ubuntu-latest
             targets: ["x86_64-unknown-linux-gnu"]
           - os: windows-latest
@@ -67,5 +67,5 @@ jobs:
       - name: Upload artifacts
         uses: actions/upload-artifact@v3.0.0
         with:
-          name: ${{ github.event.repository.name  }}-${{ steps.short-sha.outputs.SHORT_SHA }}-${{ matrix.targets.split(',')[0] }}
+          name: ${{ github.event.repository.name  }}-${{ steps.short-sha.outputs.SHORT_SHA }}-${{ matrix.targets }}
           path: ${{ github.workspace }}/target/bundled/
