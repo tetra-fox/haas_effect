@@ -1,0 +1,13 @@
+{
+    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+    "extends": ["config:base", ":semanticCommits", "schedule:weekly"],
+    "automerge": true,
+    "automergeType": "branch",
+    "packageRules": [
+      {
+        "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+        "groupName": "cargo",
+        "matchManagers": ["cargo"]
+      }
+    ]
+  }
