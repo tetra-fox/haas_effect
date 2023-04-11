@@ -39,7 +39,7 @@ jobs:
           rustup toolchain install stable --profile minimal
 
       - name: Build
-        run: cargo xtask build haashimself --release --target=${{ matrix.target }}
+        run: cargo xtask bundle haashimself --release --target=${{ matrix.target }}
 
       - name: Get short commit SHA
         id: short-sha
