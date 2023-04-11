@@ -35,10 +35,10 @@ jobs:
         with:
           prefix-key: ${{ runner.os }}
 
-     - name: Install Linux dependencies
-       if: runner.os == 'Linux'
-       shell: bash
-       run: |
+      - name: Install Linux dependencies
+        if: runner.os == 'Linux'
+        shell: bash
+        run: |
           sudo apt-get update
           sudo apt-get install libx11-dev
 
