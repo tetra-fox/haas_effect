@@ -1,0 +1,55 @@
+name: Build
+
+env:
+  CARGO_TERM_COLOR: always
+
+on:
+  push:
+    ignore-tags:
+      - "**"
+    paths:
+      - .github/workflows/**.yml
+      - src/**
+      - Cargo.lock
+      - Cargo.toml
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: "${{ matrix.os }}"
+    strategy:
+      matrix:
+        include:
+          - os: macos-latest
+            target: x86_64-apple-darwin
+          - os: ubuntu-latest
+            target: x86_64-unknown-linux-gnu
+          - os: windows-latest
+            target: x86_64-pc-windows-msvc
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3.5.0
+
+      - name: Cache dependencies
+        uses: Swatinem/rust-cache@v2.2.1
+        with:
+          prefix-key: ${{ runner.os }}
+
+      - name: Install Rust
+        run: |
+          rustup toolchain install stable --profile minimal
+
+      - name: Build
+        run: cargo xtask build haashimself --release --target=${{ matrix.target }}
+
+      - name: Get short commit SHA
+        id: short-sha
+        shell: bash
+        run: echo "SHORT_SHA=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3.1.2
+        with:
+          name: ${{ github.event.repository.name  }}-${{ steps.short-sha.outputs.SHORT_SHA }}-${{ matrix.target }}
+          path: ${{ github.workspace }}/target/bundled/
