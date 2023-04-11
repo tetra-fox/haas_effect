@@ -9,8 +9,8 @@ on:
       - .github/workflows/**.ya?ml
       - src/**
       - xtask/**
-      - '**/*.lock'
-      - '**/*.toml'
+      - "**/*.lock"
+      - "**/*.toml"
   workflow_dispatch:
 
 jobs:
@@ -20,11 +20,11 @@ jobs:
       matrix:
         include:
           - os: macos-latest
-            targets: "x86_64-apple-darwin,aarch64-apple-darwin"
+            targets: ["x86_64-apple-darwin", " aarch64-apple-darwin"]
           - os: ubuntu-latest
-            targets: "x86_64-unknown-linux-gnu"
+            targets: ["x86_64-unknown-linux-gnu"]
           - os: windows-latest
-            targets: "x86_64-pc-windows-msvc"
+            targets: ["x86_64-pc-windows-msvc"]
 
     steps:
       - name: Checkout
@@ -43,13 +43,20 @@ jobs:
           sudo apt-get install -y libasound2-dev libgl-dev libjack-dev libx11-xcb-dev  libxcb1-dev libxcb-dri2-0-dev libxcb-icccm4-dev libxcursor-dev libxkbcommon-dev libxcb-shape0-dev libxcb-xfixes0-dev
 
       - name: Install Rust
+        shell: bash
         run: |
           rustup toolchain install stable --profile minimal
+          for target in "${{ matrix.targets[@] }}"; do
+            rustup target add $target
+          done
 
       - name: Build
+        shell: bash
         run: |
-          for target in "${{ matrix.targets.split(',') }}"; do
+          for target in "${{ matrix.targets[@] }}"; do
+            mkdir -p ${{ github.workspace }}/target/bundled/$target
             cargo xtask bundle haashimself --release --target="$target"
+            mv ${{ github.workspace }}/target/bundled/HaasHimself.* ${{ github.workspace }}/target/bundled/$target
           done
 
       - name: Get short commit SHA
