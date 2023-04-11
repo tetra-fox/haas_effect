@@ -5,7 +5,7 @@
     "automergeType": "branch",
     "packageRules": [
       {
-        "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+        "matchUpdateTypes": ["minor", "patch"],
         "groupName": "cargo",
         "matchManagers": ["cargo"]
       }
