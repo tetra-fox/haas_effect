@@ -6,10 +6,11 @@ env:
 on:
   push:
     paths:
-      - .github/workflows/**.yml
+      - .github/workflows/**.ya?ml
       - src/**
-      - Cargo.lock
-      - Cargo.toml
+      - xtask/**
+      - '**/*.lock'
+      - '**/*.toml'
   workflow_dispatch:
 
 jobs:
@@ -33,6 +34,13 @@ jobs:
         uses: Swatinem/rust-cache@v2.0.0
         with:
           prefix-key: ${{ runner.os }}
+
+     - name: Install Linux dependencies
+       if: runner.os == 'Linux'
+       shell: bash
+       run: |
+          sudo apt-get update
+          sudo apt-get install libx11-dev
 
       - name: Install Rust
         run: |
