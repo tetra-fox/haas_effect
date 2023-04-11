@@ -5,8 +5,6 @@ env:
 
 on:
   push:
-    ignore-tags:
-      - "**"
     paths:
       - .github/workflows/**.yml
       - src/**
@@ -29,10 +27,10 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v3.5.0
+        uses: actions/checkout@v3.0.0
 
       - name: Cache dependencies
-        uses: Swatinem/rust-cache@v2.2.1
+        uses: Swatinem/rust-cache@v2.0.0
         with:
           prefix-key: ${{ runner.os }}
 
@@ -49,7 +47,7 @@ jobs:
         run: echo "SHORT_SHA=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
 
       - name: Upload artifacts
-        uses: actions/upload-artifact@v3.1.2
+        uses: actions/upload-artifact@v3.0.0
         with:
           name: ${{ github.event.repository.name  }}-${{ steps.short-sha.outputs.SHORT_SHA }}-${{ matrix.target }}
           path: ${{ github.workspace }}/target/bundled/
