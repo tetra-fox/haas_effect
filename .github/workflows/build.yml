@@ -33,6 +33,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3.0.0
 
+      - name: Set outputs
+        id: set-outputs
+        shell: bash
+        run: echo "SHORT_SHA=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+
       - name: Cache dependencies
         uses: Swatinem/rust-cache@v2.0.0
         with:
@@ -59,16 +64,11 @@ jobs:
           for target in $(jq -r '.[]' <<< '${{ toJSON(matrix.targets) }}'); do
             mkdir -p ${{ github.workspace }}/target/bundled/$target
             cargo xtask bundle haashimself --release --target="$target"
-            mv ${{ github.workspace }}/target/bundled/HaasHimself.* ${{ github.workspace }}/target/bundled/$target
+            mv ${{ github.workspace }}/target/bundled/HaasHimself* ${{ github.workspace }}/target/bundled/$target
           done
-
-      - name: Get short commit SHA
-        id: short-sha
-        shell: bash
-        run: echo "SHORT_SHA=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v3.0.0
         with:
-          name: ${{ github.event.repository.name  }}-${{ steps.short-sha.outputs.SHORT_SHA }}-${{ matrix.name }}
+          name: ${{ github.event.repository.name  }}-${{ steps.set-outputs.outputs.SHORT_SHA }}-${{ matrix.name }}
           path: ${{ github.workspace }}/target/bundled/
