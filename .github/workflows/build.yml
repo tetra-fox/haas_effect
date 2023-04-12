@@ -17,6 +17,7 @@ jobs:
   build:
     runs-on: "${{ matrix.os }}"
     strategy:
+    fail-fast: false
       matrix:
         include:
           - name: macOS
@@ -62,12 +63,11 @@ jobs:
         shell: bash
         run: |
           for target in $(jq -r '.[]' <<< '${{ toJSON(matrix.targets) }}'); do
-            mkdir -p "${{ env.WORKSPACE }}/target/bundled/$target"
+            workspace=$(echo "${{ github.workspace }}" | tr '\\' '/')
+            mkdir -p $workspace/target/bundled/$target
             cargo xtask bundle haashimself --release --target="$target"
-            mv "${{ env.WORKSPACE }}/target/bundled/HaasHimself*" "${{ env.WORKSPACE }}/target/bundled/$target/"
+            mv $workspace/target/bundled/HaasHimself* $workspace/target/bundled/$target
           done
-        env:
-          WORKSPACE: ${{ env.GITHUB_WORKSPACE/\\// }} # replace backslashes with forward slashes
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v3.0.0
