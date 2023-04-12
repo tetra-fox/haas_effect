@@ -37,7 +37,7 @@ jobs:
       - name: Set outputs
         id: set-outputs
         shell: bash
-        run: echo "SHORT_SHA=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+        run: echo "SHORT_SHA=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
 
       - name: Cache dependencies
         uses: Swatinem/rust-cache@v2.0.0
