@@ -62,10 +62,12 @@ jobs:
         shell: bash
         run: |
           for target in $(jq -r '.[]' <<< '${{ toJSON(matrix.targets) }}'); do
-            mkdir -p ${{ github.workspace }}/target/bundled/$target
+            mkdir -p "${{ env.WORKSPACE }}/target/bundled/$target"
             cargo xtask bundle haashimself --release --target="$target"
-            mv ${{ github.workspace }}/target/bundled/HaasHimself* ${{ github.workspace }}/target/bundled/$target
+            mv "${{ env.WORKSPACE }}/target/bundled/HaasHimself*" "${{ env.WORKSPACE }}/target/bundled/$target/"
           done
+        env:
+          WORKSPACE: ${{ env.GITHUB_WORKSPACE/\\// }} # replace backslashes with forward slashes
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v3.0.0
