@@ -11,10 +11,10 @@ description = "simple haas vst3/clap plugin"
 nih_plug = { git = "https://github.com/robbert-vdh/nih-plug.git", features = ["assert_process_allocs", "standalone"] }
 nih_plug_vizia = { git = "https://github.com/robbert-vdh/nih-plug.git" }
 enum-iterator = "1.4.0"
-crossbeam-channel = "0.5.0"
+crossbeam-channel = "0.5.8"
 atomic_float = "0.1.0"
-ringbuf = "0.3.0"
-rtrb = "0.2.0"
+ringbuf = "0.3.3"
+rtrb = "0.2.3"
 
 [workspace]
 members = ["xtask"]
