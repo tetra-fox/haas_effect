@@ -32,7 +32,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v3.5.3
+        uses: actions/checkout@v3.6.0
 
       - name: Set outputs
         id: set-outputs
@@ -40,7 +40,7 @@ jobs:
         run: echo "SHORT_SHA=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
 
       - name: Cache dependencies
-        uses: Swatinem/rust-cache@v2.6.0
+        uses: Swatinem/rust-cache@v2.7.0
         with:
           prefix-key: ${{ runner.os }}
 
@@ -70,7 +70,7 @@ jobs:
           done
 
       - name: Upload artifacts
-        uses: actions/upload-artifact@v3.1.2
+        uses: actions/upload-artifact@v3.1.3
         with:
           name: ${{ github.event.repository.name  }}-${{ steps.set-outputs.outputs.SHORT_SHA }}-${{ matrix.name }}
           path: ${{ github.workspace }}/target/bundled/
