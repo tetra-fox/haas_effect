@@ -40,7 +40,7 @@ jobs:
         run: echo "SHORT_SHA=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
 
       - name: Cache dependencies
-        uses: Swatinem/rust-cache@v2.7.1
+        uses: Swatinem/rust-cache@v2.7.3
         with:
           prefix-key: ${{ runner.os }}
 
@@ -70,7 +70,7 @@ jobs:
           done
 
       - name: Upload artifacts
-        uses: actions/upload-artifact@v4.0.0
+        uses: actions/upload-artifact@v4.1.0
         with:
           name: ${{ github.event.repository.name  }}-${{ steps.set-outputs.outputs.SHORT_SHA }}-${{ matrix.name }}
           path: ${{ github.workspace }}/target/bundled/
