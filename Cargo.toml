@@ -13,7 +13,7 @@ nih_plug_vizia = { git = "https://github.com/robbert-vdh/nih-plug.git" }
 enum-iterator = "2.0.1"
 crossbeam-channel = "0.5.12"
 atomic_float = "0.1.0"
-ringbuf = "0.3.3"
+ringbuf = "0.4.0"
 rtrb = "0.3.0"
 
 [workspace]
