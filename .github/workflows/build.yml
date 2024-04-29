@@ -32,7 +32,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4.1.1
+        uses: actions/checkout@v4.1.4
 
       - name: Set outputs
         id: set-outputs
@@ -70,7 +70,7 @@ jobs:
           done
 
       - name: Upload artifacts
-        uses: actions/upload-artifact@v4.3.2
+        uses: actions/upload-artifact@v4.3.3
         with:
           name: ${{ github.event.repository.name  }}-${{ steps.set-outputs.outputs.SHORT_SHA }}-${{ matrix.name }}
           path: ${{ github.workspace }}/target/bundled/
