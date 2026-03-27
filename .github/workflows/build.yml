@@ -60,10 +60,8 @@ jobs:
             rustup target add "$target"
           done
 
-      - name: Cache dependencies
+      - name: Restore cargo cache
         uses: Swatinem/rust-cache@v2
-        with:
-          prefix-key: ${{ runner.os }}
 
       - name: Build
         run: |
