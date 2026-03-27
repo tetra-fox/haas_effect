@@ -39,17 +39,17 @@ struct HaasEffectParams {
     #[id = "smoothing"]
     pub smoothing_ms: FloatParam,
 
-    #[id = "mix"]
-    pub mix: FloatParam,
+    #[id = "polarity"]
+    pub polarity: EnumParam<Polarity>,
 
     #[id = "feedback"]
     pub feedback: FloatParam,
 
-    #[id = "polarity"]
-    pub polarity: EnumParam<Polarity>,
-
     #[id = "crossfeed"]
     pub crossfeed: FloatParam,
+
+    #[id = "mix"]
+    pub mix: FloatParam,
 
     #[id = "limiter"]
     pub limiter: BoolParam,
@@ -101,19 +101,19 @@ impl Default for HaasEffectParams {
             .with_step_size(0.01)
             .with_value_to_string(formatters::v2s_f32_rounded(2)),
 
-            mix: FloatParam::new("Mix", 1.0, FloatRange::Linear { min: 0.0, max: 1.0 })
-                .with_unit("%")
-                .with_value_to_string(formatters::v2s_f32_percentage(2))
-                .with_string_to_value(formatters::s2v_f32_percentage()),
+            polarity: EnumParam::new("Polarity", Polarity::Normal),
 
             feedback: FloatParam::new("Feedback", 0.0, FloatRange::Linear { min: 0.0, max: 1.0 })
                 .with_unit("%")
                 .with_value_to_string(formatters::v2s_f32_percentage(2))
                 .with_string_to_value(formatters::s2v_f32_percentage()),
 
-            polarity: EnumParam::new("Polarity", Polarity::Normal),
-
             crossfeed: FloatParam::new("Crossfeed", 0.0, FloatRange::Linear { min: 0.0, max: 1.0 })
+                .with_unit("%")
+                .with_value_to_string(formatters::v2s_f32_percentage(2))
+                .with_string_to_value(formatters::s2v_f32_percentage()),
+
+            mix: FloatParam::new("Mix", 1.0, FloatRange::Linear { min: 0.0, max: 1.0 })
                 .with_unit("%")
                 .with_value_to_string(formatters::v2s_f32_percentage(2))
                 .with_string_to_value(formatters::s2v_f32_percentage()),
