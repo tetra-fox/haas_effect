@@ -7,4 +7,5 @@ a haas effect with extra steps
 ## building
 
 windows/linux: `cargo xtask bundle haas_effect --release`
+
 macos: `cargo xtask bundle-universal haas_effect --release`
