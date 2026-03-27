@@ -127,9 +127,9 @@ impl Default for HaasEffectParams {
 
 impl Plugin for HaasEffect {
     const NAME: &'static str = env!("CARGO_PKG_NAME");
-    const VENDOR: &'static str = env!("CARGO_PKG_AUTHORS");
+    const VENDOR: &'static str = "tetra";
     const URL: &'static str = env!("CARGO_PKG_HOMEPAGE");
-    const EMAIL: &'static str = env!("CARGO_PKG_AUTHORS");
+    const EMAIL: &'static str = "me@tetra.cool";
 
     const VERSION: &'static str = env!("CARGO_PKG_VERSION");
 
@@ -263,7 +263,7 @@ impl Plugin for HaasEffect {
 }
 
 impl ClapPlugin for HaasEffect {
-    const CLAP_ID: &'static str = "cool.tetra.haas";
+    const CLAP_ID: &'static str = "cool.tetra.haas_effect";
     const CLAP_DESCRIPTION: Option<&'static str> = Some(env!("CARGO_PKG_DESCRIPTION"));
     const CLAP_MANUAL_URL: Option<&'static str> = Some(Self::URL);
     const CLAP_SUPPORT_URL: Option<&'static str> = None;
