@@ -215,10 +215,9 @@ impl Plugin for HaasEffect {
             let feedback = self.params.feedback.value();
             let polarity = self.params.polarity.value();
             let crossfeed = self.params.crossfeed.value();
-            let polarity_sign = if polarity == Polarity::Inverted {
-                -1.0
-            } else {
-                1.0
+            let polarity_sign = match polarity {
+                Polarity::Inverted => -1.0,
+                Polarity::Normal => 1.0,
             };
             let no_delay = delay_samples == 0;
             let limiter = self.params.limiter.value();

@@ -41,10 +41,10 @@ impl SamplePlayer {
     }
 
     pub fn tick(&mut self, triggered: bool, channel_samples: &mut [&mut f32]) {
-        if triggered && !self.prev_trigger {
-            self.start();
-        } else if !triggered && self.prev_trigger {
-            self.stop();
+        match (triggered, self.prev_trigger) {
+            (true, false) => self.start(),
+            (false, true) => self.stop(),
+            _ => {}
         }
         self.prev_trigger = triggered;
 
