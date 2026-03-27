@@ -1,11 +1,10 @@
-# HaasHimself
-I took Dr. Helmut Haas and put him in a plugin.
-Tested in FL Studio 21.0.2 and Ableton Live 11.2.11
-This was mostly just a small project for myself to learn Rust and DSP.
+# haas_effect
 
-## Building
-After installing [Rust](https://rustup.rs/), you can compile HaasHimself as follows:
+a haas effect with extra steps
 
-```shell
-cargo xtask bundle haashimself --release
-```
+![haas_effect running in ableton](img/screen.png)
+
+## building
+
+windows/linux: `cargo xtask bundle haas_effect --release`
+macos: `cargo xtask bundle-universal haas_effect --release`

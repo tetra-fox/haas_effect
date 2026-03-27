@@ -4,5 +4,4 @@
 # [package_name]
 # name = "Human Readable Plugin Name"  # defaults to <package_name>
 
-[haashimself]
-name = "HaasHimself"
+[haas_effect]

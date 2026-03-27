@@ -1,26 +1,20 @@
 [package]
-name = "haashimself"
+name = "haas_effect"
 version = "0.1.0"
-edition = "2021"
+edition = "2024"
 authors = ["tetra <me@tetra.cool>"]
 license = "GPL-3.0-or-later"
-homepage = ""
-description = "simple haas vst3/clap plugin"
-
-[dependencies]
-nih_plug = { git = "https://github.com/robbert-vdh/nih-plug.git", features = ["assert_process_allocs", "standalone"] }
-nih_plug_vizia = { git = "https://github.com/robbert-vdh/nih-plug.git" }
-enum-iterator = "2.0.1"
-crossbeam-channel = "0.5.12"
-atomic_float = "0.1.0"
-ringbuf = "0.4.0"
-rtrb = "0.3.0"
+homepage = "https://github.com/tetra-fox"
+description = "haas effect"
 
 [workspace]
 members = ["xtask"]
 
 [lib]
-crate-type = ["cdylib", "lib"]
+crate-type = ["cdylib"]
+
+[dependencies]
+nih_plug = { git = "https://github.com/robbert-vdh/nih-plug.git", features = ["assert_process_allocs"] }
 
 [profile.release]
 lto = "thin"
